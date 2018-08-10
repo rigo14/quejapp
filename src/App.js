@@ -48,7 +48,7 @@ class App extends Component {
 				
 				{ !this.state.statesChartData && 'cargando...' }
 
-				{this.state.statesChartData && <HorizontalBar options={ this.state.statesChartOptions } data={ this.state.statesChartData } height={ 400 } /> }
+				{this.state.statesChartData && <HorizontalBar options={ this.state.statesChartOptions } data={ this.state.statesChartData } height={ 450 } /> }
 
 				<p className="dark mp3">
 					Cantidad de denuncias por dependencia
@@ -56,7 +56,7 @@ class App extends Component {
 
 				{!this.state.dependenciesChartData && 'cargando...'}
 
-				{ this.state.dependenciesChartData && <HorizontalBar options={ this.state.dependenciesChartOptions } data={ this.state.dependenciesChartData } height={ 400 } /> }
+				{ this.state.dependenciesChartData && <HorizontalBar options={ this.state.dependenciesChartOptions } data={ this.state.dependenciesChartData } height={ 200 } /> }
 
 				{/* * * * funcionalidad para la versión 2.0
 
