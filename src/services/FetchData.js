@@ -48,6 +48,21 @@ const dependencies = [
     'Secretaría del Trabajo y Prevención Social'
 ];
 
+const dependenciesShortNames = [
+    'SSP',
+    'SEGOB',
+    'SRE',
+    'SHCP',
+    'SEMARNAT',
+    'SEP',
+    'SALUD',
+    'CULTURA',
+    'PGR',
+    'CJEF',
+    'SECTUR',
+    'STPS'
+];
+
 const processStateData = fetchedAPIData => {
     // objeto donde se almacenarán las denuncias ordenadas por estados
     let statesData = {};
@@ -109,7 +124,7 @@ export function getData(component) {
             
             // la cuenta de denuncias por estado
             let statesReportsCounter = processStateData(fetchedAPIData); 
-            // el objeto de configuración del chart por estado
+            // el objeto de configuración de datos del chart por estado
             let statesChartData = {
                 labels: states,
                 datasets: [{
@@ -122,15 +137,19 @@ export function getData(component) {
                     data: statesReportsCounter
                 }]
             };
+            // el objeto de configuración de opciones del chart por estado
+            let statesChartOptions = {
+
+            };
             
             // * * * POR DEPENDENCIAS * * * //
 
             // contador de denuncias por dependencia
             let dependenciesReportsCounter = processDependenciesData(fetchedAPIData);
 
-            // el objeto de configuración del chart por dependencia
+            // el objeto de configuración de datos del chart por dependencia
             let dependenciesChartData = {
-                labels: dependencies,
+                labels: dependenciesShortNames,
                 datasets: [{
                     label: 'Cantidad de denuncias por dependencia',
                     backgroundColor: 'rgba(255,99,132,0.2)',
@@ -141,11 +160,25 @@ export function getData(component) {
                     data: dependenciesReportsCounter
                 }]
             };
+            // el objeto de configuración de opciones del chart por dependencia
+            let dependenciesChartOptions = {
+                /*
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            minRotation: 45,
+                        },
+                    }]
+                }
+                */
+            };
 
             // colocar todos los datos en el state del componente
             component.setState({
                 statesChartData: statesChartData,
-                dependenciesChartData: dependenciesChartData
+                statesChartOptions: statesChartOptions,
+                dependenciesChartData: dependenciesChartData,
+                dependenciesChartOptions: dependenciesChartOptions
             });
         });
 }
