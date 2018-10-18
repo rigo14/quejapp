@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import icon from './icon.png';
-import './App.css';
 import { getData } from './services/FetchData'
 import { HorizontalBar } from 'react-chartjs-2';
-
+import { Header } from './components/Header';
+import { Footer } from './components/Footer';
 
 class App extends Component {
 
@@ -24,58 +23,41 @@ class App extends Component {
 
 	render() {
 		return (
-			<div className="App">
-				<header className="App-header center">
-					<img src={icon} className="App-icon" alt="logo" />
-					<div>
-						<label className="App-title">QUEJAPP</label>
-					</div>
-					<div className="dark">Alza la voz.</div>
-				</header>
+	
+			<div className="container">
 
-				{/* * * * funcionalidad para la versión 2.0
-				<p className="dark mp3">
-					Consulta las denuncias en tu estado
-				</p>
-				<div className="select">
-					<Dropdown />
-				</div> 
-				*/}
+				<Header />
 
-				<p className="dark mp3">
-					Cantidad de denuncias por estado
-        		</p>
-				
-				{ !this.state.statesChartData && 'cargando...' }
+				<p className="title-2">Denuncias por estado</p>
 
-				{this.state.statesChartData && <HorizontalBar options={ this.state.statesChartOptions } data={ this.state.statesChartData } height={ 450 } /> }
+				{!this.state.statesChartData && 'cargando...'}
 
-				<p className="dark mp3">
-					Cantidad de denuncias por dependencia
-        		</p>
+				{
+					this.state.statesChartData &&
+					<HorizontalBar
+						id="states-chart"
+						height={450}
+						options={this.state.statesChartOptions}
+						data={this.state.statesChartData} />
+				}
+
+				<p className="title-2">Denuncias por dependencia</p>
 
 				{!this.state.dependenciesChartData && 'cargando...'}
 
-				{ this.state.dependenciesChartData && <HorizontalBar options={ this.state.dependenciesChartOptions } data={ this.state.dependenciesChartData } height={ 200 } /> }
-
-				{/* * * * funcionalidad para la versión 2.0
-
-				<p className="dark mp3">
-					Gráficas de denuncias estado y dependencia
-        		</p>
-
-				{!this.state.statesDependenciesChartsData && 'cargando...'}
-
 				{
-					this.state.statesDependenciesChartsData.map((stateDependenciData, i) => 
-						<div key={'k-'+i}>
-							<HorizontalBar data={stateDependenciData} />
-						</div>
-					)
-				} 
+					this.state.dependenciesChartData &&
+					<HorizontalBar
+						id="states-chart"
+						height={200}
+						options={this.state.dependenciesChartOptions}
+						data={this.state.dependenciesChartData} />
+				}
 
-				*/}
+				<Footer />
+
 			</div>
+
 		);
 	}
 }
